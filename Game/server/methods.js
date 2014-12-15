@@ -12,8 +12,8 @@ Meteor.methods({
 
 function generateStep(){
 
-	var coorsUser1 = {};
-	var coorsUser2 = {};
+	var coorsUser1 = {},
+	    coorsUser2 = {};
 
 	while( JSON.stringify(coorsUser1) == JSON.stringify(coorsUser2) ){
 
@@ -30,8 +30,8 @@ function generateStep(){
 
 function generateCoors(){
 
-	var corX = Math.floor((Math.random() * 4) + 1);
-	var corY = Math.floor((Math.random() * 4) + 1);
+	var corX = Math.floor((Math.random() * 4) + 1),
+	    corY = Math.floor((Math.random() * 4) + 1);
 
 	return {x:corX,y:corY};
 }
