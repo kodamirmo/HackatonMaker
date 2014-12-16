@@ -9,8 +9,8 @@ Template.game.rendered = function(){
 
 Template.game.events({
 	
-	'click .tecla':function(e){
-    	console.log($(this).attr("id") )
+	'click .tecla':function(event, template){
+    	console.log(event.target.id )
     	return false
 	}
 
