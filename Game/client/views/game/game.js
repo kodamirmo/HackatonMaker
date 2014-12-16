@@ -10,7 +10,6 @@ Template.game.rendered = function(){
 Template.game.events({
 	
 	'click .tecla':function(e){
-		e.preventDefault();
     	console.log($(this).attr("id") )
     	return false
 	}
