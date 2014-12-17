@@ -1,11 +1,20 @@
+require('./utils/extensions.js')
 var app = require('express')();
 var http = require('http').Server(app);
 var socket = require('socket.io')(http);
+var express = require('express');
+
+app.use(express.static(__dirname + '/public'));
+
+app.set('views', __dirname + '/views');
 
 http.listen(4000, function(){
   console.log('listening on *:4000');
 });
 
+app.get('/', function(req, res){
+  res.sendfile('index.html');
+});
 
 socket.on('connection', function(socket){
   	socket.on('start', function(msg){
@@ -14,7 +23,7 @@ socket.on('connection', function(socket){
 
   	socket.on('send my_sequence', function(my_sequence){
   		console.log(my_sequence, the_sequense)
-  		if(my_sequence === the_sequense)
+  		if( my_sequence.equals(the_sequense) )
   			socket.emit('result', { "status": "winner" });
   		else
   			socket.emit('result', { "status": "looser" });
@@ -27,7 +36,7 @@ var animate_board = function(the_sequense, callback){
 }
 
 var start_game = function(callback){
-	the_sequense = generate_sequence(1)
+	the_sequense = generate_sequence(4)
 	callback(the_sequense, you_turn)
 }
 
