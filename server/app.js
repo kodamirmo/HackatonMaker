@@ -17,16 +17,19 @@ app.get('/', function(req, res){
 });
 
 socket.on('connection', function(socket){
-  	socket.on('start', function(msg){
-  		if(msg)	start_game(animate_board)		
+  	socket.on('start', function(data){
+  		level = data.level;
+  		start_game(level, animate_board)		
   	});
 
   	socket.on('send my_sequence', function(my_sequence){
   		console.log(my_sequence, the_sequense)
-  		if( my_sequence.equals(the_sequense) )
-  			socket.emit('result', { "status": "winner" });
-  		else
-  			socket.emit('result', { "status": "looser" });
+  		
+  		if( my_sequence.equals(the_sequense) ){
+  			socket.emit('result', { "status": "win" });
+  		}else{
+  			socket.emit('result', { "status": "lose" });
+  		}
   	});	
 });
 
@@ -35,8 +38,8 @@ var animate_board = function(the_sequense, callback){
 	callback(the_sequense)
 }
 
-var start_game = function(callback){
-	the_sequense = generate_sequence(4)
+var start_game = function(level, callback){
+	the_sequense = generate_sequence(level)
 	callback(the_sequense, you_turn)
 }
 

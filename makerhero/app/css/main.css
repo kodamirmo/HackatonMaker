@@ -40,6 +40,14 @@
 		border-radius: 5px 5px 5px 5px;
 	}
 
+	.message{
+		color:#fff;
+		text-shadow: 5px 5px 5px #000;
+		font-family: "joystix";
+		font-size: 5em;
+
+	}
+
 	#end_in{
 		color: #fff;
 	}
