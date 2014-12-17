@@ -8,9 +8,13 @@ Template.game.rendered = function(){
 
 
 Template.game.events({
-	'click .tecla':function(event, template){
-    	console.log(event.target.id )
-    	return false
+	'click .tecla' : function(event){
+
+    	var tecla = {};
+    	tecla.row = $(event.target).data('row');
+    	tecla.collumn = $(event.target).data('collumn');
+    	console.log(tecla);
+    	
 	}
 
 });
