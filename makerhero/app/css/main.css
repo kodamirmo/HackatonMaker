@@ -39,6 +39,10 @@
 		border-radius: 5px 5px 5px 5px;
 	}
 
+	#end_in{
+		color: #fff;
+	}
+
 	.tablero {
 		margin: 0px auto;
 	}
@@ -112,52 +116,52 @@
 	}
 
 	
-	#tecla_00:hover{
+	#tecla_:hover{
 		background: #00FF00;
 	}
 
 	
-	#tecla_01:hover{
+	#tecla_1:hover{
 		background: #40FF00;
 	}
 
 	
-	#tecla_02:hover{
+	#tecla_2:hover{
 		background: #80FF00;
 	}
 
 	
-	#tecla_03:hover{
+	#tecla_3:hover{
 		background: #BFFF00;
 	}
 
 	
-	#tecla_04:hover{
+	#tecla_4:hover{
 		background: #FFFF00;
 	}
 
 	
-	#tecla_05:hover{
+	#tecla_5:hover{
 		background: #FFBF00;
 	}
 
 	
-	#tecla_06:hover{
+	#tecla_6:hover{
 		background: #FF8000;
 	}
 
 	
-	#tecla_07:hover{
+	#tecla_7:hover{
 		background: #FF4000;
 	}
 
 	
-	#tecla_08:hover{
+	#tecla_8:hover{
 		background: #FE2E2E;
 	}
 
 	
-	#tecla_09:hover{
+	#tecla_9:hover{
 		background: #00FF80;
 	}
 	
