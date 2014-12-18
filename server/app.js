@@ -3,7 +3,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var socket = require('socket.io')(http);
 var express = require('express');
-//var gpio = require("pi-gpio");
+var gpio = require("pi-gpio");
 
 app.use(express.static(__dirname + '/public'));
 
