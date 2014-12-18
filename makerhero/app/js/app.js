@@ -21,6 +21,7 @@ $(function() {
 	})
 	
 	socket.on('you turn', function(data){
+		console.log(data)
 		if(data.init == false) return 
 
 		$( ".tablero" ).css("display", "block")
@@ -46,6 +47,8 @@ $(function() {
 	});
 
 	socket.on('result', function(msg){
+		if(status == "lose";) return false
+		
 		console.log("---- secuencia del usuario ----")
 		console.log(my_sequence)
 		
