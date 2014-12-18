@@ -18,8 +18,7 @@ app.get('/', function(req, res){
 
 socket.on('connection', function(socket){
   	socket.on('start', function(data){
-  		level = data.level;
-  		start_game(level, animate_board)		
+  		start_game(data, animate_board)		
   	});
 
   	socket.on('send my_sequence', function(my_sequence){
@@ -33,18 +32,18 @@ socket.on('connection', function(socket){
   	});	
 });
 
-var animate_board = function(the_sequense, callback){
+var animate_board = function(the_sequense, init, callback){
 	//codigo para animar la placa
-	callback(the_sequense)
+	callback(the_sequense, init)
 }
 
-var start_game = function(level, callback){
-	the_sequense = generate_sequence(level)
-	callback(the_sequense, you_turn)
+var start_game = function(data, callback){
+	the_sequense = generate_sequence(data.level)
+	callback(the_sequense, data.init, you_turn)
 }
 
-var you_turn = function(the_sequense){
-	socket.emit('you turn', { "data": the_sequense });	
+var you_turn = function(the_sequense, init){
+	socket.emit('you turn', { "sequense": the_sequense, "init": init });	
 }
 
 var generate_sequence = function(num){

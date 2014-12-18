@@ -22,14 +22,29 @@
 
 	h1{
 		font-family: "joystix";
-		font-size: 3em;
-		color:rgb(0, 0, 250);
-		text-shadow: 3px 3px #fff;
+		font-size: 4em;
+		color:rgba(0, 250, 250, 0.7);
+		text-shadow: 3px 3px rgba(255, 255, 255, 0.3);
+		margin-top: 20%;
 	}
 
 	h2{
 		font-family: "joystix";
 		font-size: 2em;
+		color:#fff;
+	}
+
+	#pantalla_intro{
+
+	}
+	
+	#pantalla_intro h1{
+		line-height: 50px; 
+	}
+
+	#tiempo{
+		font-family: "joystix";
+		font-size: 4em;
 		color:#fff;
 	}
 

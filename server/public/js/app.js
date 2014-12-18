@@ -4,7 +4,7 @@ $(function() {
 	var my_sequence = [];
 
 	$("#start").on("click", function(){
-		socket.emit('start', {level: 1} );
+		socket.emit('start', {level: 1, init: true} );
 		return false
 	})
 
