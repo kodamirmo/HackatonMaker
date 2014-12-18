@@ -65,6 +65,10 @@ var initRaspberry = function(){
 
 	var errorOpenPin = function(pin){
 
+		gpio.write(pin, 0, function() {   
+        	gpio.close(pin);                        
+    	});
+
 		console.log("Error open pin: " + pin);
 	};
 
