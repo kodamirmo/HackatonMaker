@@ -60,9 +60,11 @@ var generate_sequence = function(num){
 	return sequence;
 }
 
+
 var initRaspberry = function(){
 
-	var errorOpenPin = function (pin){
+	var errorOpenPin = function(pin){
+
 		console.log("Error open pin: " + pin);
 	};
 
