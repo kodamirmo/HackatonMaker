@@ -3,6 +3,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var socket = require('socket.io')(http);
 var express = require('express');
+//var gpio = require("pi-gpio");
 
 app.use(express.static(__dirname + '/public'));
 
@@ -32,11 +33,14 @@ socket.on('connection', function(socket){
 
 var animate_board = function(the_sequense, callback){
 	//codigo para animar la placa
-	callback(the_sequense)
+
+	turnOnLed(the_sequense,0);
+	callback(the_sequense);
+
 }
 
 var start_game = function(callback){
-	the_sequense = generate_sequence(4)
+	the_sequense = generate_sequence(7)
 	callback(the_sequense, you_turn)
 }
 
@@ -53,4 +57,137 @@ var generate_sequence = function(num){
 	}
 	console
 	return sequence;
+}
+
+
+initRaspberr();
+
+var initRaspberr = function(){
+
+	function errorOpenPin(pin){
+		console.log("Error open pin: " + pin);
+	}
+
+	gpio.open(2, "output", errorOpenPin(2));
+	gpio.open(3, "output", errorOpenPin(3));
+	gpio.open(4, "output", errorOpenPin(4));
+	gpio.open(5, "output", errorOpenPin(5));
+	gpio.open(6, "output", errorOpenPin(6));
+	gpio.open(7, "output", errorOpenPin(7));
+	gpio.open(8, "output", errorOpenPin(8));
+	gpio.open(9, "output", errorOpenPin(9));
+	gpio.open(10, "output", errorOpenPin(10));
+	gpio.open(11, "output", errorOpenPin(11));
+	gpio.open(12, "output", errorOpenPin(12));
+	gpio.open(13, "output", errorOpenPin(13));
+	gpio.open(14, "output", errorOpenPin(14));
+	gpio.open(15, "output", errorOpenPin(15));
+	gpio.open(16, "output", errorOpenPin(16));
+
+}
+
+var turnOnLed = function(the_sequense,index){
+
+
+	var casilla = the_sequense[index];
+
+	console.log("Turn onLed " + casilla);
+
+	var row = 0,
+		collumn = 0;
+
+	
+	switch(Number(casilla)){
+
+		case 0:
+			row = 1;
+			collumn =1;
+		break;
+
+		case 1:
+			row = 1;
+			collumn =2;
+		break;
+
+		case 2:
+			row = 1;
+			collumn =3;
+		break;
+
+		case 3:
+			row = 1;
+			collumn =4;
+		break;
+
+		case 4:
+			row = 2;
+			collumn =1;
+		break;
+
+		case 5:
+			row = 2;
+			collumn =2;
+		break;
+
+		case 6:
+			row = 2;
+			collumn =3;
+		break;
+
+		case 7:
+			row = 2;
+			collumn =4;
+		break;
+
+		case 8:
+			row = 3;
+			collumn =1;
+		break;
+
+		case 9:
+			row = 3;
+			collumn =2;
+		break;
+
+		case 10:
+			row = 3;
+			collumn =3;
+		break;
+
+		case 11:
+			row = 3;
+			collumn =4;
+		break;
+
+		case 12:
+			row = 4;
+			collumn =1;
+		break;
+
+		case 13:
+			row = 4;
+			collumn =2;
+		break;
+
+		case 14:
+			row = 4;
+			collumn =3;
+		break;
+
+		case 15:
+			row = 4;
+			collumn =4;
+		break;	
+
+	};
+
+	index = ++index;
+
+	var callback = function(){
+		turnOnLed(the_sequense,index);
+	};
+
+	if(index < the_sequense.length)
+		setTimeout(callback,1000);
+
 }
