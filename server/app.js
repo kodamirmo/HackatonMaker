@@ -3,7 +3,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var socket = require('socket.io')(http);
 var express = require('express');
-//var gpio = require("pi-gpio");
+var gpio = require("pi-gpio");
 
 app.use(express.static(__dirname + '/public'));
 
@@ -18,34 +18,35 @@ app.get('/', function(req, res){
 });
 
 socket.on('connection', function(socket){
-  	socket.on('start', function(msg){
-  		if(msg)	start_game(animate_board)		
+  	socket.on('start', function(data){
+  		start_game(data, animate_board)		
   	});
 
   	socket.on('send my_sequence', function(my_sequence){
   		console.log(my_sequence, the_sequense)
-  		if( my_sequence.equals(the_sequense) )
-  			socket.emit('result', { "status": "winner" });
-  		else
-  			socket.emit('result', { "status": "looser" });
+  		
+  		if( my_sequence.equals(the_sequense) ){
+  			socket.emit('result', { "status": "win" });
+  		}else{
+  			socket.emit('result', { "status": "lose" });
+  		}
   	});	
 });
 
-var animate_board = function(the_sequense, callback){
-	//codigo para animar la placa
+var animate_board = function(the_sequense, init, callback){
 
 	turnOnLed(the_sequense,0);
 	callback(the_sequense);
 
 }
 
-var start_game = function(callback){
-	the_sequense = generate_sequence(7)
-	callback(the_sequense, you_turn)
+var start_game = function(data, callback){
+	the_sequense = generate_sequence(data.level)
+	callback(the_sequense, data.init, you_turn)
 }
 
-var you_turn = function(the_sequense){
-	socket.emit('you turn', { "data": the_sequense });	
+var you_turn = function(the_sequense, init){
+	socket.emit('you turn', { "sequense": the_sequense, "init": init });	
 }
 
 var generate_sequence = function(num){
