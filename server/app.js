@@ -3,7 +3,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var socket = require('socket.io')(http);
 var express = require('express');
-var gpio = require("pi-gpio");
+//var gpio = require("pi-gpio");
 
 app.use(express.static(__dirname + '/public'));
 
@@ -60,14 +60,11 @@ var generate_sequence = function(num){
 	return sequence;
 }
 
+var initRaspberry = function(){
 
-initRaspberr();
-
-var initRaspberr = function(){
-
-	function errorOpenPin(pin){
+	var errorOpenPin = function (pin){
 		console.log("Error open pin: " + pin);
-	}
+	};
 
 	gpio.open(2, "output", errorOpenPin(2));
 	gpio.open(3, "output", errorOpenPin(3));
@@ -85,7 +82,7 @@ var initRaspberr = function(){
 	gpio.open(15, "output", errorOpenPin(15));
 	gpio.open(16, "output", errorOpenPin(16));
 
-}
+};
 
 var turnOnLed = function(the_sequense,index){
 
@@ -192,3 +189,6 @@ var turnOnLed = function(the_sequense,index){
 		setTimeout(callback,1000);
 
 }
+
+
+initRaspberry();
