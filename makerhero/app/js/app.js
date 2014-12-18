@@ -46,8 +46,12 @@ $(function() {
 	});
 
 	socket.on('result', function(msg){
+<<<<<<< HEAD
 
 		if(status == "lose") return false
+=======
+		if(status == "lose") return false;
+>>>>>>> f75cf4f26248e45dc3b5b23073d93a3d8499254e
 		
 		console.log("---- secuencia del usuario ----")
 		console.log(my_sequence)
