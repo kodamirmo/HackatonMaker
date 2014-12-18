@@ -68,11 +68,9 @@ var initRaspberry = function(){
 		console.log("Error open pin: " + pin);
 	};
 
-	//gpio.open(2, "output", errorOpenPin(2));
-	//gpio.open(3, "output", errorOpenPin(3));
+	gpio.open(2, "output", errorOpenPin(2));
+	gpio.open(3, "output", errorOpenPin(3));
 	gpio.open(4, "output", errorOpenPin(4));
-	
-	/*
 	gpio.open(5, "output", errorOpenPin(5));
 	gpio.open(6, "output", errorOpenPin(6));
 	gpio.open(7, "output", errorOpenPin(7));
@@ -85,7 +83,6 @@ var initRaspberry = function(){
 	gpio.open(14, "output", errorOpenPin(14));
 	gpio.open(15, "output", errorOpenPin(15));
 	gpio.open(16, "output", errorOpenPin(16));
-	*/
 
 };
 
