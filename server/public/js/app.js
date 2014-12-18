@@ -1,6 +1,6 @@
 $(function() {  
 
-	var socket = io.connect('http://localhost:4000');
+	var socket = io.connect('http://192.168.1.82:4000');
 	var my_sequence = [];
 
 	$("#start").on("click", function(){

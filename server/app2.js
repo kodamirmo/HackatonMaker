@@ -41,8 +41,8 @@ var animate_board = function(the_sequense, init, callback){
 }
 
 var start_game = function(data, callback){
-	the_sequense = generate_sequence(data.level)
-	callback(the_sequense, data.init, you_turn)
+	the_sequense = generate_sequence(20); //generate_sequence(data.level)
+	callback(the_sequense, data.init, you_turn);
 }
 
 var you_turn = function(the_sequense, init){
@@ -69,44 +69,53 @@ var initRaspberry = function(){
 
 		gpio.open(pin, "output", function(err) {        
     		gpio.write(pin, 0, function() {         
-        		gpio.close(pin);                        
+        		//gpio.close(pin);                        
     		});
 		});
 
 	};
 
+
+	//transistores
 	initPin(3);
 	initPin(5);
 	initPin(7);
 	initPin(29);
-	initPin(31);
-	initPin(26);
-	initPin(24);
-	initPin(21);
-	initPin(19);
-	initPin(23);
-	initPin(32);
-	initPin(33);
-	initPin(8);
+
+	//Fila 4
+	initPin(31);   	//verde
+	initPin(26);	//rojo
+
+	//Fila 3
+	initPin(24);	//verde
+	initPin(21);	//rojo	
+
+	//Fila 2
+	initPin(19);	//verde	
+	initPin(23);	//rojo
+
+	//Fila 1
+	initPin(32);	//verde	
+	initPin(33);	//rojo
 
 
-	var callback = function(){
-		turnOnPin(pin);
-	}
+	//var callback = function(){
+	//	turnOnPin(pin1,pin2);
+	//}
 
-	var pin = 3;
-	setTimeout(callback,3000);
-
+	//var pin1 = 33;
+	//var pin2 = 29;
+	//setTimeout(callback,3000);
 
 };
 
-var turnOnPin = function(pin){
-	console.log("Turn ON pin: " + pin);
- 	gpio.write(pin, 1, function(){});
+var turnOnPin = function(pin1, pin2){
+	console.log("Turn ON pin: " + pin1 + " y " + pin2);
+ 	gpio.write(pin1, 1, function(){});
+ 	gpio.write(pin2, 1, function(){});
 };
 
 var turnOnLed = function(the_sequense,index){
-
 
 	var casilla = the_sequense[index];
 
@@ -119,92 +128,103 @@ var turnOnLed = function(the_sequense,index){
 	switch(Number(casilla)){
 
 		case 0:
-			row = 1;
-			collumn =1;
+			row = 3;
+			collumn = 31;
 		break;
 
 		case 1:
-			row = 1;
-			collumn =2;
+			row = 3;
+			collumn = 24;
 		break;
 
 		case 2:
-			row = 1;
-			collumn =3;
+			row = 3;
+			collumn = 19;
 		break;
 
 		case 3:
-			row = 1;
-			collumn =4;
+			row = 3;
+			collumn = 32;
 		break;
 
 		case 4:
-			row = 2;
-			collumn =1;
+			row = 5;
+			collumn = 31;
 		break;
 
 		case 5:
-			row = 2;
-			collumn =2;
+			row = 5;
+			collumn = 24;
 		break;
 
 		case 6:
-			row = 2;
-			collumn =3;
+			row = 5;
+			collumn = 19;
 		break;
 
 		case 7:
-			row = 2;
-			collumn =4;
+			row = 5;
+			collumn = 32;
 		break;
 
 		case 8:
-			row = 3;
-			collumn =1;
+			row = 7;
+			collumn = 31;
 		break;
 
 		case 9:
-			row = 3;
-			collumn =2;
+			row = 7;
+			collumn = 24;
 		break;
 
 		case 10:
-			row = 3;
-			collumn =3;
+			row = 7;
+			collumn = 19;
 		break;
 
 		case 11:
-			row = 3;
-			collumn =4;
+			row = 7;
+			collumn = 32;
 		break;
 
 		case 12:
-			row = 4;
-			collumn =1;
+			row = 29;
+			collumn = 31;
 		break;
 
 		case 13:
-			row = 4;
-			collumn =2;
+			row = 29;
+			collumn = 24;
 		break;
 
 		case 14:
-			row = 4;
-			collumn =3;
+			row = 29;
+			collumn = 19;
 		break;
 
 		case 15:
-			row = 4;
-			collumn =4;
+			row = 29;
+			collumn = 32;
 		break;
 
 	};
 
-	index = ++index;
+	gpio.write(row, 1, function(){});
+	gpio.write(collumn, 1, function(){});
 
 	var callback = function(){
 		turnOnLed(the_sequense,index);
 	};
+
+	var callbackApagar = function(){
+		gpio.write(row, 0, function(){});
+		gpio.write(collumn, 0, function(){});		
+	}
+
+	if(index < the_sequense.length)
+		setTimeout(callbackApagar,900);
+
+	index = ++index;
 
 	if(index < the_sequense.length)
 		setTimeout(callback,1000);
