@@ -41,7 +41,8 @@ var animate_board = function(the_sequense, init, callback){
 }
 
 var start_game = function(data, callback){
-	the_sequense = generate_sequence(20); //generate_sequence(data.level)
+	//the_sequense = generate_sequence(20); //generate_sequence(data.level)
+	the_sequense = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 	callback(the_sequense, data.init, you_turn);
 }
 
@@ -124,105 +125,203 @@ var turnOnLed = function(the_sequense,index){
 	var row = 0,
 		collumn = 0;
 
+	//31     24     19     32
 
 	switch(Number(casilla)){
 
+
 		case 0:
 			row = 3;
-			collumn = 31;
+			collumn = 0;
 		break;
 
 		case 1:
 			row = 3;
-			collumn = 24;
+			collumn = 1;
 		break;
 
 		case 2:
 			row = 3;
-			collumn = 19;
+			collumn = 2;
 		break;
 
 		case 3:
 			row = 3;
-			collumn = 32;
+			collumn = 3;
 		break;
+
+
+
 
 		case 4:
 			row = 5;
-			collumn = 31;
+			collumn = 0;
 		break;
 
 		case 5:
 			row = 5;
-			collumn = 24;
+			collumn = 1;
 		break;
 
 		case 6:
 			row = 5;
-			collumn = 19;
+			collumn = 2;
 		break;
 
 		case 7:
 			row = 5;
-			collumn = 32;
+			collumn = 3;
 		break;
+
+
+
 
 		case 8:
 			row = 7;
-			collumn = 31;
+			collumn = 0;
 		break;
 
 		case 9:
 			row = 7;
-			collumn = 24;
+			collumn = 1;
 		break;
 
 		case 10:
 			row = 7;
-			collumn = 19;
+			collumn = 2;
 		break;
 
 		case 11:
 			row = 7;
-			collumn = 32;
+			collumn = 3;
 		break;
+
+
+
 
 		case 12:
 			row = 29;
-			collumn = 31;
+			collumn = 0;
 		break;
 
 		case 13:
 			row = 29;
-			collumn = 24;
+			collumn = 1;
 		break;
 
 		case 14:
 			row = 29;
-			collumn = 19;
+			collumn = 2;
 		break;
 
 		case 15:
 			row = 29;
-			collumn = 32;
+			collumn = 3;
+		break;
+
+	};
+
+
+	var color = Math.floor(Math.random() * (3 + 1));
+
+	
+
+	switch(collumn){
+
+		case 0:
+
+			switch(color){
+				case 1: 
+					gpio.write(31, 1, function(){});
+				break;
+				case 2: 
+					gpio.write(26, 1, function(){});
+				break;
+				case 3: 
+					gpio.write(31, 1, function(){});
+					gpio.write(26, 1, function(){});
+				break;
+			};
+
+		break;
+
+		case 1:
+
+			switch(color){
+				case 1: 
+					gpio.write(24, 1, function(){});
+				break;
+				case 2: 
+					gpio.write(21, 1, function(){});
+				break;
+				case 3: 
+					gpio.write(24, 1, function(){});
+					gpio.write(21, 1, function(){});
+				break;
+			};
+		
+		break;
+
+		case 2:
+		
+			switch(color){
+				case 1: 
+					gpio.write(19, 1, function(){});
+				break;
+				case 2: 
+					gpio.write(23, 1, function(){});
+				break;
+				case 3: 
+					gpio.write(23, 1, function(){});
+					gpio.write(19, 1, function(){});
+				break;
+			};
+
+		break;
+
+		case 3:
+		
+			switch(color){
+				case 1: 
+					gpio.write(32, 1, function(){});
+				break;
+				case 2: 
+					gpio.write(33, 1, function(){});
+				break;
+				case 3: 
+					gpio.write(32, 1, function(){});
+					gpio.write(33, 1, function(){});
+				break;
+			};
+
 		break;
 
 	};
 
 	gpio.write(row, 1, function(){});
-	gpio.write(collumn, 1, function(){});
+	
 
 	var callback = function(){
 		turnOnLed(the_sequense,index);
 	};
 
 	var callbackApagar = function(){
-		gpio.write(row, 0, function(){});
-		gpio.write(collumn, 0, function(){});		
+		gpio.write(3, 0, function(){});
+		gpio.write(5, 0, function(){});
+		gpio.write(7, 0, function(){});
+		gpio.write(29, 0, function(){});
+		gpio.write(31, 0, function(){});
+		gpio.write(26, 0, function(){});
+		gpio.write(24, 0, function(){});
+		gpio.write(21, 0, function(){});
+		gpio.write(19, 0, function(){});
+		gpio.write(23, 0, function(){});
+		gpio.write(32, 0, function(){});	
+		gpio.write(33, 0, function(){});
 	}
 
 	if(index < the_sequense.length)
-		setTimeout(callbackApagar,900);
+		setTimeout(callbackApagar,950);
 
 	index = ++index;
 
